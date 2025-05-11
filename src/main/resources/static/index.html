@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Specifies the document type and language -->
+    <meta charset="UTF-8"> <!-- Sets the character encoding to UTF-8 -->
+    <title>Monty Hall Simulation</title> <!-- Title of the webpage -->
+    <link rel="stylesheet" href="css/style.css"> <!-- Links an external CSS file for styling -->
+</head>
+<body>
+<div class="container">
+    <!-- Displays an image with a description, width, and height -->
+    <img src="images/pirate.jpg" alt="Description of image" width="300" height="200">
+
+    <!-- Main title and subtitle of the page -->
+    <h1 class="title">Pirate Island<br><span class="subtitle">Monty Hall Simulation</span></h1>
+
+    <!-- Form for user input to configure the simulation -->
+    <form id="simulation-form">
+        <!-- Input field for the number of simulation runs -->
+        <label for="runs">Number of Runs:</label>
+        <input type="number" id="runs" name="runs" min="1" required> <!-- Minimum value is 1 and input is required -->
+
+        <!-- Dropdown menu for selecting the simulation strategy -->
+        <label for="strategy">Choose Strategy:</label>
+        <select id="strategy" name="strategy">
+            <option value="SWITCH">Yes (Switch)</option> <!-- Option to switch -->
+            <option value="STAY">No (Stay)</option> <!-- Option to stay -->
+        </select>
+
+        <!-- Button to submit the form and run the simulation -->
+        <button type="submit">Run Simulation</button>
+    </form>
+
+    <!-- Div to display the simulation results -->
+    <div id="result" class="result-box"></div>
+</div>
+
+<!-- Embedded Java script code  -->
+<script>
+    // Adds an event listener to the form to handle the submit event
+    document.getElementById("simulation-form").addEventListener("submit", function (e) {
+        e.preventDefault(); // Prevents the default form submission behavior
+
+        // Retrieves the user input values for runs and strategy
+        const runs = document.getElementById("runs").value;
+        const strategy = document.getElementById("strategy").value;
+
+        // Sends a GET request to the simulation API with the user inputs
+        fetch(`/api/simulations/run?runs=${runs}&strategy=${strategy}`)
+            .then(response => {
+                if (!response.ok) throw new Error("API request failed"); // Handles API errors
+                return response.json(); // Parses the JSON response
+            })
+            .then(data => {
+                // Displays the simulation results in the result div
+                document.getElementById("result").innerHTML = `
+                    <p><strong>Runs:</strong> ${data.runs}</p>
+                    <p><strong>Successes:</strong> ${data.successCount}</p>
+                    <p><strong>Success Rate:</strong> ${(data.successRate * 100).toFixed(2)}%</p>
+                `;
+            })
+            .catch(error => {
+                // Displays an error message if the API request fails
+                document.getElementById("result").innerHTML = `<p style="color:red;">Error: ${error.message}</p>`;
+            });
+    });
+</script>
+
+</body>
+
+</html>

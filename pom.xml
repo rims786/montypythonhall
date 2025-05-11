@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+	<!-- POM Model Version -->
+	<modelVersion>4.0.0</modelVersion>
+
+	<!-- Parent POM defining Spring Boot version and default configurations -->
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>3.2.3</version>
+		<relativePath/> <!-- Points to the parent POM -->
+	</parent>
+
+	<!-- Project Properties -->
+	<properties>
+		<java.version>21</java.version> <!-- Java version used for compilation -->
+		<spring.classformat.ignore>true</spring.classformat.ignore> <!-- Spring class format configuration -->
+		<maven.compiler.release>21</maven.compiler.release> <!-- Java release version -->
+	</properties>
+
+	<!-- Project Information -->
+	<groupId>com.skatt</groupId> <!-- Group ID for the project -->
+	<artifactId>montypython-demo</artifactId> <!-- Artifact ID for the project -->
+	<version>0.0.1-SNAPSHOT</version> <!-- Project version -->
+	<name>montypython-demo</name> <!-- Project name -->
+	<description>Demo Project for Monty Python Problem</description> <!-- Project description -->
+
+	<!-- Metadata Section -->
+	<url/> <!-- Project URL -->
+	<licenses>
+		<license/> <!-- License information -->
+	</licenses>
+	<developers>
+		<developer/> <!-- Developer information -->
+	</developers>
+	<scm>
+		<connection/> <!-- SCM connection -->
+		<developerConnection/> <!-- Developer SCM connection -->
+		<tag/> <!-- SCM tag -->
+		<url/> <!-- SCM URL -->
+	</scm>
+
+	<!-- Dependencies -->
+	<dependencies>
+		<!-- Spring Web Dependency -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+
+		<!-- Testing Dependencies -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope> <!-- Test scope -->
+			<exclusions>
+				<exclusion>
+					<groupId>org.junit.vintage</groupId>
+					<artifactId>junit-vintage-engine</artifactId> <!-- Exclude JUnit Vintage -->
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.junit.platform</groupId>
+			<artifactId>junit-platform-launcher</artifactId>
+			<version>1.11.4</version>
+			<scope>test</scope> <!-- Test scope -->
+		</dependency>
+
+		<!-- Input Validation Dependencies -->
+		<dependency>
+			<groupId>jakarta.validation</groupId>
+			<artifactId>jakarta.validation-api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-validation</artifactId>
+		</dependency>
+
+		<!-- Security Dependencies -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-test</artifactId>
+			<scope>test</scope> <!-- Test scope -->
+		</dependency>
+
+		<!-- OpenAPI Documentation Dependency -->
+		<dependency>
+			<groupId>org.springdoc</groupId>
+			<artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+			<version>2.1.0</version>
+		</dependency>
+	</dependencies>
+
+	<!-- Build Configuration -->
+	<build>
+		<plugins>
+			<!-- Spring Boot Maven Plugin - Creates executable JAR -->
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+
+			<!-- Maven Compiler Plugin - Configures Java version -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>${java.version}</source> <!-- Source Java version -->
+					<target>${java.version}</target> <!-- Target Java version -->
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>
